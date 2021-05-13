@@ -141,7 +141,7 @@ connection.query(queryString, [name, email, picture, authType, locale, new Date(
           res.status(409).json({success: false,"message": "This email id already exists in the system : "+email})
 		  return;
         } else {
-			console.log(err);
+			       console.log(err);
             res.status(500).json({success: false,"message": err.sqlMessage});
             return;
 		}
@@ -227,7 +227,8 @@ connection.query(queryString, [name, email, picture, authType, locale, new Date(
     const connection = config.getConnection();
     connection.query(queryString, [email, amount, payee, category, paymethod, status, description, paymentdate], (err, result, fields) => {
       if (err) {
-			res.status(500).json({success: false,"message": "Error while creating new expense"});
+           console.log('Error Occured',err);
+			     res.status(500).json({success: false,"message": "Error while creating new expense"});
       		return;
       }
       if (result) {

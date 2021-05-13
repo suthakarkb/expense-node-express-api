@@ -5,7 +5,7 @@
 
 # API Inventory list
 * POST: /user
-* GET: /expense
+* GET: /expenses
 * GET: /expense/id
 * POST: /expense
 * PUT: /expense
