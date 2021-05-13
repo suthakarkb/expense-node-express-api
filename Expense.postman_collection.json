@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "6a5d2276-dc3c-47fe-af1c-a11b312e5983",
+		"name": "Expense",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"suthakar\",\r\n    \"email\": \"sudhasksg@gmail.com\",\r\n    \"picture\": \"https://lh3.googleusercontent.com/-5q9UiC9R5bM/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckaIwUa5wdTCkJ44QayvmURCWRIKQ/photo.jpg\",\r\n    \"locale\": \"en\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.237.97.172:3000/api/user",
+					"host": [
+						"52",
+						"237",
+						"97",
+						"172"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateExpense",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "test token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\":23.50,\r\n    \"payee\": \"Mustafa Center\",\r\n    \"category\": \"Food\",\r\n    \"paymethod\": \"Cash\",\r\n    \"status\": \"Cleared\",\r\n    \"description\": \"groceries, vegetables\",\r\n    \"paymentdate\": \"2021-05-13 08:23:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.237.97.172:3000/api/expense",
+					"host": [
+						"52",
+						"237",
+						"97",
+						"172"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"expense"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateExpense",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "test token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"amount\":23.50,\r\n    \"payee\": \"Mustafa Center\",\r\n    \"category\": \"Food\",\r\n    \"paymethod\": \"Credit Card\",\r\n    \"status\": \"Cleared\",\r\n    \"description\": \"groceries, vegetables, juice\",\r\n    \"paymentdate\": \"2021-05-13 08:23:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.237.97.172:3000/api/expense",
+					"host": [
+						"52",
+						"237",
+						"97",
+						"172"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"expense"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListExpenses",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "test token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.237.97.172:3000/api/expenses",
+					"host": [
+						"52",
+						"237",
+						"97",
+						"172"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetExpense",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "test token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"amount\":23.50,\r\n    \"payee\": \"Mustafa Center\",\r\n    \"category\": \"Food\",\r\n    \"paymethod\": \"Credit Card\",\r\n    \"status\": \"Cleared\",\r\n    \"description\": \"groceries\",\r\n    \"paymentdate\": \"2021-05-13 08:23:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.237.97.172:3000/api/expense/4",
+					"host": [
+						"52",
+						"237",
+						"97",
+						"172"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"expense",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteExpense",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "test token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"amount\":23.50,\r\n    \"payee\": \"Mustafa Center\",\r\n    \"category\": \"Food\",\r\n    \"paymethod\": \"Credit Card\",\r\n    \"status\": \"Cleared\",\r\n    \"description\": \"groceries\",\r\n    \"paymentdate\": \"2021-05-13 08:23:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.237.97.172:3000/api/expense/4",
+					"host": [
+						"52",
+						"237",
+						"97",
+						"172"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"expense",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListDataTypes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "test token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "52.237.97.172:3000/api/data/category",
+					"host": [
+						"52",
+						"237",
+						"97",
+						"172"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"data",
+						"category"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
