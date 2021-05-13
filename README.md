@@ -1,7 +1,7 @@
 # expense-nodejs-rest-api
 **A node.js API server for MySQL**
 - RESTful
-- API OATH2 Authentication With Google / Facebook
+- API OATH2 Authentication With Google
 
 # API Inventory list
 * POST: /user
