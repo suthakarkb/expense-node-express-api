@@ -363,7 +363,7 @@ connection.query(queryString, [name, email, picture, authType, locale, new Date(
         const email = jwtResult.email;
         //Line 4 : JOIN player p ON (p.club_code = c1.club_code OR p.club_code = c2.club_code)
         let queryString = "select id, email, amount, payee, category, pay_method, status, description, ";
-        queryString += "payment_date from expense where email = ? ";
+        queryString += "DATE_FORMAT(payment_date, '%Y-%m-%d %H:%i:%s') as paymentdate from expense where email = ? ";
         console.log("query: " + queryString)
         connection.query(queryString, [email], (err, rows, fields) => {
           if (err) {
@@ -375,7 +375,7 @@ connection.query(queryString, [name, email, picture, authType, locale, new Date(
           const expenses = rows.map((row) => {
               return {  id: row.id, email: row.email, amount: row.amount, payee: row.payee,
                         category: row.category,  paymethod: row.pay_method, status: row.status,
-                        description: row.description, paymentdate: row.payment_date }
+                        description: row.description, paymentdate: row.paymentdate }
           })
           res.status(200).json({success: true, data: expenses});
           //res.status(200).json(rows)
