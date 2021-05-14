@@ -172,7 +172,7 @@ connection.query(queryString, [name, email, picture, authType, locale, new Date(
  *
  */
   router.post("/expense", async function(req, res) {
-    console.log("Create a new club...");
+    console.log("Create a new expense...");
     //console.log(JSON.stringify(req.headers));
     var validInput = true;
     var message = "";
@@ -217,14 +217,14 @@ connection.query(queryString, [name, email, picture, authType, locale, new Date(
     }
     console.log('after JWT verification',jwtResult.email);
 
-	const email = jwtResult.email;
+	const email = req.headers.authorization;
   const amount = req.body.amount;
   const payee = req.body.payee;
   const category = req.body.category?req.body.category:'';
   const paymethod = req.body.paymethod?req.body.paymethod:'';
   const status = req.body.status;
 	const description = req.body.description?req.body.description:'';
-	const paymentdate = req.body.paymentdate;
+	const paymentdate = req.body.paymentdate?req.body.paymentdate:new Date();
 
     let queryString = "INSERT INTO expense (email, amount, payee, category, pay_method, status, description, payment_date)";
     queryString = queryString + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -364,7 +364,7 @@ connection.query(queryString, [name, email, picture, authType, locale, new Date(
         console.log('after JWT verification');
         //Validation Passed. Query club in the system
         const connection = config.getConnection();
-        const email = jwtResult.email;
+        const email = req.headers.authorization;
         //Line 4 : JOIN player p ON (p.club_code = c1.club_code OR p.club_code = c2.club_code)
         let queryString = "select id, email, amount, payee, category, pay_method, status, description, ";
         queryString += "DATE_FORMAT(payment_date, '%Y-%m-%d %H:%i:%s') as paymentdate from expense where email = ? ";
