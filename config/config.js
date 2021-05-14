@@ -24,7 +24,7 @@ config.password = 'root1234';
 config.table_prefix = '';
 config.secretKey = 'SecretSG50';
 config.authKey = "key=AAAA3iU9_BI:APA91bEtxGrrpTp2q00B6Q9QjY5EWLW63PlRuPsC_CVkjXAej6c3uBYNpssnvscRslzX6sEEOKr5cBxQz0vNmVwd1xTPg2rco7dlqdzb2-zOsdoMfwDqHj3e8FgCEjLi4pMKtkqIEzVN";
-
+config.salt = "F3229A0B371ED2D9441B830D21A390C3";
 //Pagination
 config.paginate = true;
 config.page_limit = 10;

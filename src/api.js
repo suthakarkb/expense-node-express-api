@@ -81,8 +81,12 @@ async function verifyGoogleToken(idToken) {
     const connection = config.getConnection();
     const selectUser = 'SELECT * from users where email = ?';
     console.log(selectUser+':'+email);
-    const result = await connection.promise().query(selectUser, [email]);
-    return result;
+    const result = await connection.promise().query(selectUser, [email]).catch(console.error);
+    if(!result) return null;
+    let userInfo = result[0];
+    if(!userInfo) return null;
+    let user = userInfo[0];
+    return user;
   }
 
 
@@ -545,3 +549,61 @@ connection.query(queryString, [name, email, picture, authType, locale, new Date(
              //res.status(200).json(datalist)
            })
          });
+
+
+         /**
+         * @api {post} /authuser This API authenricate an user in the system
+         * @apiName authuser
+         * @apiGroup api
+         *
+         * @apiParam {String} [email]  email
+         *
+         */
+         router.post('/authuser', async function(req, res) {
+             var validInput = true;
+             var message = "";
+             if (req.body.email == undefined || req.body.email.trim() == ""){
+               validInput = false;
+               message = "Username is not provided";
+             }
+             if (req.body.password == undefined || req.body.password.trim() == ""){
+               validInput = false;
+               message = "Password is not provided";
+             }
+             if (!validInput){
+               console.log("Input params not valid");
+               res.status(400).json({"message": message});
+               return;
+             }
+         		const email = req.body.email;
+            const passcode = req.body.password;
+            //let thisuser = await getUserByEmail(email).catch(console.error);
+            //console.log('user',thisuser);
+         	  const authuser_query = "SELECT email from users where email = ? AND AES_DECRYPT(passcode,UNHEX('"+config.getConfig().salt+"')) = ?";
+             //console.log(authuser_query);
+             //console.log(config.getConfig().secretKey);
+             const connection = config.getConnection();
+             connection.query(authuser_query, [email, passcode], (err, results, fields) => {
+               if(err){
+                   res.status(500).json({success: false,"message": err.sqlMessage})
+                   return
+               }
+               else if(!results.length) {
+                 //res.status(500).json({success: false,"message": "Invalid user"})
+                 const add_user = "INSERT INTO users (name, email, authtype, locale, created_date, passcode) VALUES (?, ?, ?, ?, ?, AES_ENCRYPT(?,UNHEX('"+config.getConfig().salt+"')))";
+                 //console.log(add_user);
+                 const name =  email.split("@").slice(0, -1);
+                 connection.query(add_user, [name, email, 'email', 'en', new Date(), passcode], (err, results, fields) => {
+                   if(err){
+                       res.status(500).json({success: false,"message": err.sqlMessage})
+                       return
+                   }
+                 res.status(200).json({success: true, email: email, "message":"New user added with email "+email});
+                 return
+                 })
+               }else{
+                 res.status(200).json({success: true, email: email, "message":"Valid user with email "+email});
+                 return
+               }
+         	  })
+           });
