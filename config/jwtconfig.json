@@ -1,9 +1,9 @@
 {
-  "secret": "SecretExpense@1",
-  "audience": "expense-nodejs-api",
-  "issuer": "https://appseries.net",
-  "appClient": "com.suthakarkb.expense",
-  "clientID": "158342592840-afrh0jsv6sfukfn1pasisffocpdvv9ie.apps.googleusercontent.com",
-  "gaudience": "158342592840-afrh0jsv6sfukfn1pasisffocpdvv9ie.apps.googleusercontent.com",
+  "secret": "",
+  "audience": "",
+  "issuer": "",
+  "appClient": "",
+  "clientID": "",
+  "gaudience": "",
   "gissuer": "https://accounts.google.com"
 }
